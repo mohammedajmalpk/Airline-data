@@ -1,0 +1,99 @@
+<html>
+  <head>
+   <title>
+	British Airways
+   </title>
+  </head>
+<style> 
+	input[type=text] {
+	  box-sizing: border-box;
+	  border: 2px solid #ccc;
+	  border-radius: 4px;
+	  background-color: white;
+	  height: 30px;
+	  width: 50%;
+	}
+	fieldset {
+	  background-color: #eeeeee;
+	  width:50%;
+	  height:100px;
+	}
+	table, td, th {
+	  border: 1px solid black;
+	  border-top:None;
+	  border-bottom:None;
+	}
+	table {
+	  border-collapse: collapse;
+	  width: 85%;
+	  background-color:lightgray;
+	}
+	th {
+	  background-color: #933131;
+  	  color: white;
+	}
+	tr {
+	  height: 50px;
+	  margin-right:50px;
+	}
+	.blink{
+	  animation: blinker 1s linear infinite;
+	  color:red;
+	}
+	@keyframes blinker {
+        	50% {
+          	  opacity: 0;
+        	  }
+      	}
+</style>
+  <body style="color:#DC143C; background-color:#FFE5E5">
+  	<center><h1 style="margin-top:20;">OPEN FLIGHTS</h1></center><hr>
+	<center><form method="POST" style="margin-top:50;">
+	   <fieldset>
+                <label><b>AIRLINE NAME</b></label><br> 
+                <input type="text" style="margin-top:15;" placeholder="Enter Airline Name " name="Aid" required>
+	    <button type="submit">Submit</button>
+	   </fieldset>
+	</form></center><hr><br>
+
+<center><h1 style="color: red;">Flight Details</h1></center><br>
+<center><table> 
+    <thead> 
+    <tr> 
+	<th>Airline ID</th> 
+	<th>Name</th>
+	<th>Alias</th>
+	<th>IATA</th>
+	<th>ICAO</th>
+	<th>Callsign</th>
+	<th>Country</th>
+	<th>Active</th> 
+    </tr> 
+    </thead> 
+    <tbody>
+      {%if details%} 
+        {% for row in details %}  
+            <tr> 
+                <td>{{row.0}}</td> 
+                <td>{{row.1}}</td>
+                <td>{{row.2}}</td> 
+                <td>{{row.3}}</td>
+                <td>{{row.4}}</td> 
+                <td>{{row.5}}</td>
+                <td>{{row.6}}</td> 
+                <td>{{row.7}}</td> 
+            </tr>
+	{% if row.7 == 'N' %}
+	    <h4><p class="blink">Status: NOT ACTIVE</p></h4>
+	{% else %}
+	    <h4><p class="blink">Status: ACTIVE</p></h4>
+	{% endif %}	 
+        {% endfor %} 
+      {%else%}
+	<h4><p class="blink">ENTER VALID AIRLINE NAME.</p></h4>
+    {% endif %}
+    </tbody>
+
+</table></center>	    
+  </body>
+</html>
